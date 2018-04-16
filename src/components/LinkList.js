@@ -5,10 +5,12 @@ import gql from 'graphql-tag';
 
 class LinkList extends Component {
   render() {
+    // Loading Msg
     if (this.props.feedQuery && this.props.feedQuery.loading) {
       return <div>Loading</div>;
     }
 
+    // Error Msg
     if (this.props.feedQuery && this.props.feedQuery.error) {
       return <div>Error</div>;
     }
@@ -21,8 +23,9 @@ class LinkList extends Component {
   }
 }
 
+// GraphQL Query
+// FeedQuery is the operation name used by Apollo
 const FEED_QUERY = gql`
-  # 2
   query FeedQuery {
     feed {
       links {
@@ -35,4 +38,5 @@ const FEED_QUERY = gql`
   }
 `;
 
+// "Wrap" the LinkList container with query
 export default graphql(FEED_QUERY, { name: 'feedQuery' })(LinkList);
